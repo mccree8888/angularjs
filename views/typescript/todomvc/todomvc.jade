@@ -1,0 +1,65 @@
+doctype html
+html
+  head
+    title Backbone.js
+    link(href='/stylesheets/todomvc/todos.css', media='all', rel='stylesheet', type='text/css')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.1/underscore-min.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.0/backbone.localStorage-min.js')
+    script(src='/typescript/todomvc/todomvc.js')
+  body
+    // Todo App Interface
+    #todoapp
+      .title
+        h1 Todos
+      .content
+        #create-todo
+          input#new-todo(placeholder='What needs to be done?', type='text')
+          span.ui-tooltip-top(style='display:none;') Press Enter to save this task
+        #todos
+          input.check.mark-all-done(type='checkbox')
+          label(for='check-all') Mark all as complete
+          ul#todo-list
+        #todo-stats
+    #credits
+      | Created by
+      br
+      a(href='http://jgn.me/') Jérôme Gravel-Niquet
+      | .
+      br
+      | Cleanup, edits:
+      a(href='http://addyosmani.com') Addy Osmani
+      | .
+      br
+      | TypeScript version by
+      a(href='http://blogs.msdn.com/lukeh') Luke Hoban
+      | .
+    // Templates
+    script#item-template(type='text/template').
+      <div class="todo <%= done ? 'done' : '' %>">
+      <div class="display">
+      <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+      <label class="todo-content"><%= content %></label>
+      <span class="todo-destroy"></span>
+      </div>
+      <div class="edit">
+      <input class="todo-input" type="text" value="<%= content %>" />
+      </div>
+      </div>
+    script#stats-template(type='text/template').
+      <% if (total) { %>
+      <span class="todo-count">
+      <span class="number"><%= remaining %></span>
+      <span class="word"><%= remaining == 1 ? 'item' : 'items' %></span> left.
+      </span>
+      <% } %>
+      <% if (done) { %>
+      <span class="todo-clear">
+      <a href="#">
+      Clear <span class="number-done"><%= done %></span>
+      completed <span class="word-done"><%= done == 1 ? 'item' : 'items' %></span>
+      </a>
+      </span>
+      <% } %>
